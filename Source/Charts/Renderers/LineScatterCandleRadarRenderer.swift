@@ -43,6 +43,7 @@ open class LineScatterCandleRadarRenderer: BarLineScatterCandleBubbleRenderer
         // draw horizontal highlight lines
         if set.isHorizontalHighlightIndicatorEnabled
         {
+            context.setLineDash(phase: 4, lengths: [4,4])
             context.beginPath()
             context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: point.y))
             context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: point.y))
@@ -50,3 +51,4 @@ open class LineScatterCandleRadarRenderer: BarLineScatterCandleBubbleRenderer
         }
     }
 }
+
