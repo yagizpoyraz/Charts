@@ -633,10 +633,13 @@ open class LineChartRenderer: LineRadarRenderer
             
             _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
             
-            let circleRadius = dataSet.circleRadius
-            let circleDiameter = circleRadius * 2.0
-            let circleHoleRadius = dataSet.circleHoleRadius
+            var circleRadius = dataSet.circleRadius
+            var circleDiameter = circleRadius * 2.0
+            var circleHoleRadius = dataSet.circleHoleRadius
             let circleHoleDiameter = circleHoleRadius * 2.0
+            var circleHoleColor = dataSet.circleHoleColor
+            var drawCircleFromBlock = false
+            
             
             let drawCircleHole = dataSet.isDrawCircleHoleEnabled &&
                 circleHoleRadius < circleRadius &&
@@ -649,6 +652,24 @@ open class LineChartRenderer: LineRadarRenderer
             {
                 guard let e = dataSet.entryForIndex(j) else { break }
 
+                if let set : LineChartDataSet = dataSet as? LineChartDataSet  {
+                    if let drawCircleBlock = set.drawCircleBlock {
+                        drawCircleFromBlock = drawCircleBlock(e)
+
+                    }
+                }
+                
+                if drawCircleFromBlock == false {
+                    circleRadius = 0
+                    circleDiameter = 0
+                    circleHoleRadius = 0
+                    circleHoleColor = UIColor.clear
+                }else {
+                    circleRadius = dataSet.circleRadius
+                    circleDiameter = circleRadius * 2.0
+                    circleHoleRadius = dataSet.circleHoleRadius
+                    circleHoleColor = dataSet.circleHoleColor
+                }
                 pt.x = CGFloat(e.x)
                 pt.y = CGFloat(e.y * phaseY)
                 pt = pt.applying(valueToPixelMatrix)
@@ -693,7 +714,7 @@ open class LineChartRenderer: LineRadarRenderer
                     
                     if drawCircleHole
                     {
-                        context.setFillColor(dataSet.circleHoleColor!.cgColor)
+                        context.setFillColor(circleHoleColor!.cgColor)
                      
                         // The hole rect
                         rect.origin.x = pt.x - circleHoleRadius

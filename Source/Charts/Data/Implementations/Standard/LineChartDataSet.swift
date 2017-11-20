@@ -15,6 +15,9 @@ import CoreGraphics
 
 open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
 {
+    open var drawCircleBlock : ((ChartDataEntry) -> (Bool))?
+
+    
     @objc(LineChartMode)
     public enum Mode: Int
     {
