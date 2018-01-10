@@ -544,7 +544,16 @@ open class PieChartRenderer: DataRenderer
                                          y: y,
                                          size: icon.size)
                 }
-
+                if dataSet.drawNotchEnabled {
+                    
+                    let x = labelRadius * sliceXBase + center.x
+                    let y = labelRadius * sliceYBase + center.y - lineHeight
+                    
+                    if dataSet.isDrawNotchEnabled {
+                        let values = ["index":j, "x":x, "y":y] as [String : Any]
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ChartsDrawNotch"), object: nil, userInfo: values)
+                    }
+                }
                 xIndex += 1
             }
         }

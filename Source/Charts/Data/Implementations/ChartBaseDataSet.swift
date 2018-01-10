@@ -362,6 +362,13 @@ open class ChartBaseDataSet: NSObject, IChartDataSet
     {
         return drawValuesEnabled
     }
+    
+    open var drawNotchEnabled = false
+    
+    open var isDrawNotchEnabled: Bool
+    {
+        return drawNotchEnabled
+    }
 
     /// Set this to true to draw y-icons on the chart.
     ///
