@@ -307,7 +307,7 @@ open class PieChartRenderer: DataRenderer
             
             let drawValues = dataSet.isDrawValuesEnabled
             
-            if !drawValues && !drawEntryLabels && !dataSet.isDrawIconsEnabled
+            if !drawValues && !drawEntryLabels && !dataSet.isDrawIconsEnabled && !dataSet.isDrawNotchEnabled
             {
                 continue
             }
