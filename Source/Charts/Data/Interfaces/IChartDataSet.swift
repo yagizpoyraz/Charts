@@ -258,4 +258,9 @@ public protocol IChartDataSet
     
     /// - returns: `true` if this DataSet is visible inside the chart, or `false` ifit is currently hidden.
     var isVisible: Bool { get }
+    
+    //FOREKS:
+    var drawNotchEnabled: Bool { get set}
+    
+    var isDrawNotchEnabled: Bool { get }
 }
